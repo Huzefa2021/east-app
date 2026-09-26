@@ -1,7 +1,7 @@
 {
   "name": "MCGM East Zone Abandoned Vehicle Project",
   "short_name": "MCGM East",
-  "start_url": "./",
+  "start_url": "./app.html",
   "display": "standalone",
   "background_color": "#08263d",
   "theme_color": "#0b3f64",
