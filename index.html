@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MCGM — Abandoned Vehicles (East Zone)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="description" content="MCGM East Zone abandoned vehicle management system">
+<meta name="theme-color" content="#0b3d6e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MCGM East">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  html, body { margin: 0; height: 100%; background: #f3f5f8; overflow: hidden; }
+  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  #wait { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+          font: 15px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #0b3d6e; background: #f3f5f8; transition: opacity .3s; }
+  #wait .ring { width: 92px; height: 92px; border-radius: 50%; border: 4px solid #d6e2ef; border-top-color: #0b3d6e; animation: spin 1s linear infinite; position: absolute; }
+  #wait .logo { width: 72px; height: 72px; position: relative; display: flex; align-items: center; justify-content: center; }
+  #wait img { width: 64px; height: 64px; }
+  #wait .box { position: relative; width: 92px; height: 92px; display: flex; align-items: center; justify-content: center; }
+  #wait a { color: #0b3d6e; font-size: 13px; display: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<!-- The system itself runs on Google Apps Script; this page shows it full-screen under east.crescendoits.com. -->
+<div id="wait"><div class="box"><div class="ring"></div><img src="logo.png" alt=""></div><div>Loading East Zone system…</div>
+  <a id="direct" href="https://script.google.com/macros/s/AKfycbwiA58-V13C2upSaltf3ODK-AcNaR-R86JhZILpNDiKMdT7rVaXmjJFYxWs6dSHMGLJ/exec">Taking long? Open directly</a></div>
+<iframe id="app" title="MCGM East Zone" allow="camera; clipboard-read; clipboard-write; fullscreen; web-share"
+  src="https://script.google.com/macros/s/AKfycbwiA58-V13C2upSaltf3ODK-AcNaR-R86JhZILpNDiKMdT7rVaXmjJFYxWs6dSHMGLJ/exec"></iframe>
+<script>
+  const w = document.getElementById('wait');
+  document.getElementById('app').addEventListener('load', () => { w.style.opacity = 0; setTimeout(() => w.remove(), 300); });
+  setTimeout(() => { const a = document.getElementById('direct'); if (a) a.style.display = 'block'; }, 15000);
+</script>
+</body>
+</html>

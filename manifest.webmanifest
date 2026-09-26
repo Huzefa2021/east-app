@@ -1,0 +1,11 @@
+{
+  "name": "MCGM — Abandoned Vehicles (East Zone)",
+  "short_name": "MCGM East",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3f5f8",
+  "theme_color": "#0b3d6e",
+  "icons": [
+    { "src": "logo.png", "sizes": "1266x1266", "type": "image/png", "purpose": "any" }
+  ]
+}
