@@ -2,51 +2,195 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.mcgm.gov.in https://www.gstatic.com; connect-src https://script.google.com https://*.googleusercontent.com; frame-src https://www.google.com https://recaptcha.google.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>MCGM — Abandoned Vehicles (East Zone)</title>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<meta name="description" content="MCGM East Zone Abandoned Vehicle Project — Crescendo Innovative Solutions LLP">
-<meta name="author" content="Crescendo Innovative Solutions LLP">
-<meta name="application-name" content="MCGM East Zone Abandoned Vehicle Project">
-<meta property="og:title" content="MCGM East Zone Abandoned Vehicle Project">
-<meta property="og:description" content="Crescendo Innovative Solutions LLP · MCGM East Zone Abandoned Vehicle Project">
-<meta property="og:site_name" content="Crescendo Innovative Solutions LLP">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="MCGM East Zone Abandoned Vehicle Project — check if your vehicle was towed. Crescendo Innovative Solutions LLP">
+<meta property="og:title" content="MCGM East Zone — Was my vehicle towed?">
 <meta property="og:url" content="https://east.crescendoits.com/">
 <meta property="og:image" content="https://east.crescendoits.com/logo.png">
 <meta name="theme-color" content="#0b3f64">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="MCGM East">
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 <link rel="manifest" href="manifest.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  html, body { margin: 0; height: 100%; overflow: hidden; background: #08263d; }
-  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: #08263d; }
-  /* Same splash as the system itself (Index.html #boot + Styles .mspin), so the hand-over is seamless */
-  .mspin { position: relative; width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; flex: none }
-  .mspin img { width: 56px; height: 56px; object-fit: contain; border-radius: 50%; background: #fff; padding: 5px; box-shadow: 0 2px 10px rgba(16,24,40,.18) }
-  .mspin i { position: absolute; inset: 0; border-radius: 50%; border: 4px solid rgba(26,79,143,.14); border-top-color: #1a4f8f; border-right-color: #d4a017; animation: mspin .9s linear infinite }
-  .mspin.lg { width: 120px; height: 120px } .mspin.lg img { width: 84px; height: 84px }
-  @keyframes mspin { to { transform: rotate(360deg) } }
-  #boot { position: fixed; inset: 0; z-index: 7000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #fff; text-align: center; padding: 16px;
-    background: radial-gradient(1200px 600px at 20% -10%, #1b6aa5 0%, #0b3f64 45%, #08263d 100%); transition: opacity .35s; font-family: Inter, Arial, sans-serif }
-  #boot b { font: 700 1.35rem Inter, Arial, sans-serif; margin-top: 6px } #boot span { opacity: .8; font-size: .9rem }
-  #boot .mspin i { border-color: rgba(255,255,255,.18); border-top-color: #fff; border-right-color: #f5c542 }
-  #boot.out { opacity: 0; pointer-events: none }
-  #boot a { color: #fff; opacity: .85 }
+  :root { --blue: #0b3f64; --blue2: #1a4f8f; --gold: #d4a017; --ink: #101828; --muted: #667085; --line: #e4e7ec; --ok: #067647; --warn: #b54708; --err: #b42318 }
+  * { box-sizing: border-box }
+  body { margin: 0; font-family: Inter, "Noto Sans Devanagari", Arial, sans-serif; color: var(--ink); background: #f4f6fa }
+  header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: var(--blue); color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.2) }
+  header img { width: 42px; height: 42px; border-radius: 50%; background: #fff; padding: 3px }
+  header .t { flex: 1; min-width: 0 } header .t b { display: block; font-size: 1rem } header .t small { opacity: .8 }
+  .lang { display: flex; gap: 4px } .lang button { border: 1px solid rgba(255,255,255,.4); background: transparent; color: #fff; border-radius: 8px; padding: 5px 8px; font: inherit; font-size: .8rem; cursor: pointer }
+  .lang button.on { background: #fff; color: var(--blue) }
+  .team { background: var(--gold); color: #1d1d1d; font-weight: 700; text-decoration: none; padding: 9px 14px; border-radius: 10px; white-space: nowrap }
+  main { max-width: 760px; margin: 0 auto; padding: 18px 16px 40px }
+  .hero { background: radial-gradient(900px 400px at 10% -20%, #1b6aa5, var(--blue) 55%, #08263d); color: #fff; border-radius: 18px; padding: 22px 18px; margin-bottom: 16px }
+  .hero h1 { margin: 0 0 6px; font-size: 1.5rem } .hero p { margin: 0; opacity: .9 }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(16,24,40,.06) }
+  label { display: block; font-weight: 600; margin-bottom: 6px }
+  input { width: 100%; font-size: 1.4rem; letter-spacing: .08em; text-transform: uppercase; padding: 12px 14px; border: 2px solid var(--line); border-radius: 12px; font-family: inherit }
+  input:focus { outline: none; border-color: var(--blue2) }
+  .go { margin-top: 12px; width: 100%; border: 0; border-radius: 12px; padding: 14px; font: 700 1.1rem Inter, sans-serif; background: var(--blue2); color: #fff; cursor: pointer }
+  .go:disabled { opacity: .6; cursor: wait }
+  .msg { margin-top: 10px; min-height: 20px; color: var(--err); font-weight: 600 }
+  .res { border-left: 6px solid var(--muted) } .res.towed, .res.processing { border-left-color: var(--err) } .res.hold { border-left-color: var(--warn) }
+  .res.noticed { border-left-color: var(--gold) } .res.released, .res.removed, .res.none { border-left-color: var(--ok) }
+  .res h2 { margin: 0 0 6px; font-size: 1.2rem } .kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 12px 0 }
+  .kv b { color: var(--muted); font-weight: 600 }
+  .dues { font-size: 1.6rem; font-weight: 800; color: var(--err) }
+  ul { padding-left: 20px; margin: 6px 0 } .muted { color: var(--muted); font-size: .9rem }
+  .app { display: flex; gap: 14px; align-items: center } .app a { background: #12b76a; color: #fff; text-decoration: none; font-weight: 700; padding: 12px 16px; border-radius: 12px; white-space: nowrap }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 20px }
+  @media (max-width: 560px) { header .t small { display: none } .team { padding: 8px 10px } .app { flex-direction: column; align-items: stretch; text-align: center } }
 </style>
 </head>
 <body>
-<!-- The system runs on Google Apps Script; this page shows it full-screen at east.crescendoits.com. -->
-<div id="boot"><div class="mspin lg"><img src="logo.png" alt="MCGM"><i></i></div>
-  <b>East Zone Portal</b><span>Abandoned Vehicles · loading…</span></div>
-<iframe id="app" title="MCGM East Zone" allow="camera; clipboard-read; clipboard-write; fullscreen; web-share"
-  src="https://script.google.com/macros/s/AKfycbwiA58-V13C2upSaltf3ODK-AcNaR-R86JhZILpNDiKMdT7rVaXmjJFYxWs6dSHMGLJ/exec"></iframe>
+<header>
+  <img src="https://www.mcgm.gov.in/com.mcgm.newframework/images/logo_V1.png" alt="MCGM">
+  <div class="t"><b data-t="org">MCGM East Zone</b><small data-t="proj">Abandoned Vehicles</small></div>
+  <div class="lang" id="lang"><button data-l="en">EN</button><button data-l="hi">हिं</button><button data-l="mr">मरा</button></div>
+  <a class="team" href="app.html" data-t="team">🔐 Team login</a>
+</header>
+<main>
+  <div class="hero"><h1 data-t="h1">Was my vehicle towed?</h1><p data-t="h1s">Enter your vehicle number to see where it is and what to pay.</p></div>
+  <div class="card">
+    <label for="vrn" data-t="vrn">Vehicle number</label>
+    <input id="vrn" maxlength="13" autocomplete="off" placeholder="MH03AB1234" inputmode="text">
+    <div id="cap" style="margin-top:12px"></div>
+    <button class="go" id="go" data-t="check">Check</button>
+    <div class="msg" id="msg"></div>
+  </div>
+  <div id="out"></div>
+  <div class="card app"><div style="flex:1"><b data-t="appT">GPS camera app for our team</b><div class="muted" data-t="appS">Field staff: install this camera app so every photo carries the date, time and GPS location.</div></div>
+    <a href="https://gpsmapcamera.com/" target="_blank" rel="noopener" data-t="appB">⬇ Download</a></div>
+</main>
+<footer>© Municipal Corporation of Greater Mumbai · Crescendo Innovative Solutions LLP</footer>
 <script>
-  var b = document.getElementById('boot');
-  // the system shows its own identical splash while it starts, so this one simply fades into it
-  document.getElementById('app').addEventListener('load', function () { b.classList.add('out'); setTimeout(function () { b.remove(); }, 400); });
-  setTimeout(function () { if (document.body.contains(b)) b.querySelector('span').innerHTML = 'Still loading… <a href="https://script.google.com/macros/s/AKfycbwiA58-V13C2upSaltf3ODK-AcNaR-R86JhZILpNDiKMdT7rVaXmjJFYxWs6dSHMGLJ/exec">open directly</a>'; }, 25000);
+(function () {
+  var EXEC = 'https://script.google.com/macros/s/AKfycbwiA58-V13C2upSaltf3ODK-AcNaR-R86JhZILpNDiKMdT7rVaXmjJFYxWs6dSHMGLJ/exec';
+  var T = {
+    en: { org: 'MCGM East Zone', proj: 'Abandoned Vehicles', team: '🔐 Team login', h1: 'Was my vehicle towed?', h1s: 'Enter your vehicle number to see where it is and what to pay.',
+      vrn: 'Vehicle number', check: 'Check', checking: 'Checking…', appT: 'GPS camera app for our team', appS: 'Field staff: install this camera app so every photo carries the date, time and GPS location.', appB: '⬇ Download',
+      none: 'No record for this vehicle', noneS: 'We have no abandoned-vehicle record for this number.', towed: 'Your vehicle was towed', hold: 'Your vehicle is on hold', processing: 'Listed for scrapping — act now',
+      noticed: 'Notice issued on your vehicle', released: 'Already released', scrapped: 'Disposed', removed: 'No action pending',
+      tTowed: 'It is kept in our yard. Charges increase every day. Visit the yard with the documents below.', tHold: 'It is in our yard and on hold. Contact the ward office / police station before coming.',
+      tProc: 'It is listed for scrapping. Contact the ward office immediately to claim it.', tNotice: 'Remove your vehicle from the road before the date below to avoid towing and charges.',
+      tRel: 'This vehicle was already released to its owner.', tScr: 'This vehicle was not claimed and has been disposed of as per the rules.', tRem: 'The vehicle was not found at the spot. No action is pending.',
+      track: 'Tracking no.', towedOn: 'Towed on', yard: 'Yard', map: 'Open in Google Maps', dues: 'Amount payable today', breakup: 'Penalty ₹{p} + towing ₹{t} + storage ₹{s} ({d} days × ₹{r})',
+      docs: 'Bring these documents', noticeOn: 'Notice pasted on', towAfter: 'Remove before', office: 'Ward office', contact: 'Helpline', relOn: 'Released on',
+      d1: 'Registration Certificate (RC) of the vehicle', d2: 'Photo ID of the owner (Aadhaar / PAN / driving licence)', d3: 'Vehicle insurance', d4: 'Authority letter + ID if someone else comes for the owner',
+      bad: 'Enter the vehicle number like MH03AB1234.', robot: 'Please tick "I am not a robot".', err: 'Could not check now — please try again.' },
+    hi: { org: 'बीएमसी पूर्व क्षेत्र', proj: 'लावारिस वाहन', team: '🔐 टीम लॉगिन', h1: 'क्या मेरा वाहन उठाया गया?', h1s: 'अपना वाहन नंबर डालें — वाहन कहाँ है और कितना भरना है, देखें।',
+      vrn: 'वाहन नंबर', check: 'देखें', checking: 'जाँच हो रही है…', appT: 'हमारी टीम के लिए GPS कैमरा ऐप', appS: 'फ़ील्ड स्टाफ: यह कैमरा ऐप लगाएँ ताकि हर फ़ोटो में तारीख, समय और GPS लोकेशन रहे।', appB: '⬇ डाउनलोड',
+      none: 'इस वाहन का कोई रिकॉर्ड नहीं', noneS: 'इस नंबर का कोई लावारिस-वाहन रिकॉर्ड नहीं है।', towed: 'आपका वाहन उठाया गया है', hold: 'आपका वाहन होल्ड पर है', processing: 'स्क्रैप की सूची में — तुरंत संपर्क करें',
+      noticed: 'आपके वाहन पर नोटिस लगा है', released: 'पहले ही छोड़ा जा चुका है', scrapped: 'निपटाया गया', removed: 'कोई कार्रवाई बाकी नहीं',
+      tTowed: 'वाहन हमारे यार्ड में है। शुल्क हर दिन बढ़ता है। नीचे दिए दस्तावेज़ लेकर यार्ड आएँ।', tHold: 'वाहन यार्ड में होल्ड पर है। आने से पहले वार्ड कार्यालय / पुलिस स्टेशन से संपर्क करें।',
+      tProc: 'वाहन स्क्रैप की सूची में है। वाहन लेने के लिए तुरंत वार्ड कार्यालय से संपर्क करें।', tNotice: 'टोइंग और शुल्क से बचने के लिए नीचे दी गई तारीख से पहले वाहन सड़क से हटा लें।',
+      tRel: 'यह वाहन मालिक को पहले ही सौंपा जा चुका है।', tScr: 'इस वाहन पर दावा नहीं किया गया और नियमानुसार निपटाया गया।', tRem: 'वाहन मौके पर नहीं मिला। कोई कार्रवाई बाकी नहीं।',
+      track: 'ट्रैकिंग नंबर', towedOn: 'उठाने की तारीख', yard: 'यार्ड', map: 'गूगल मैप में खोलें', dues: 'आज देय राशि', breakup: 'जुर्माना ₹{p} + टोइंग ₹{t} + भंडारण ₹{s} ({d} दिन × ₹{r})',
+      docs: 'ये दस्तावेज़ साथ लाएँ', noticeOn: 'नोटिस लगाने की तारीख', towAfter: 'इससे पहले हटाएँ', office: 'वार्ड कार्यालय', contact: 'हेल्पलाइन', relOn: 'छोड़ने की तारीख',
+      d1: 'वाहन का रजिस्ट्रेशन सर्टिफिकेट (RC)', d2: 'मालिक का फ़ोटो पहचान पत्र (आधार / पैन / ड्राइविंग लाइसेंस)', d3: 'वाहन बीमा', d4: 'मालिक के स्थान पर कोई और आए तो अधिकार पत्र + पहचान पत्र',
+      bad: 'वाहन नंबर ऐसे लिखें: MH03AB1234', robot: 'कृपया "मैं रोबोट नहीं हूँ" पर टिक करें।', err: 'अभी जाँच नहीं हो सकी — कृपया फिर कोशिश करें।' },
+    mr: { org: 'बृहन्मुंबई महानगरपालिका पूर्व विभाग', proj: 'बेवारस वाहने', team: '🔐 टीम लॉगिन', h1: 'माझे वाहन उचलले गेले का?', h1s: 'तुमचा वाहन क्रमांक टाका — वाहन कुठे आहे आणि किती भरायचे ते पहा.',
+      vrn: 'वाहन क्रमांक', check: 'तपासा', checking: 'तपासत आहे…', appT: 'आमच्या टीमसाठी GPS कॅमेरा ॲप', appS: 'फील्ड कर्मचारी: हा कॅमेरा ॲप लावा, म्हणजे प्रत्येक फोटोवर तारीख, वेळ आणि GPS स्थान येईल.', appB: '⬇ डाउनलोड',
+      none: 'या वाहनाची नोंद नाही', noneS: 'या क्रमांकाची बेवारस-वाहन नोंद नाही.', towed: 'तुमचे वाहन उचलले गेले आहे', hold: 'तुमचे वाहन होल्डवर आहे', processing: 'भंगार यादीत — लगेच संपर्क करा',
+      noticed: 'तुमच्या वाहनावर नोटीस लावली आहे', released: 'आधीच सोडले आहे', scrapped: 'निकाली काढले', removed: 'कोणतीही कारवाई बाकी नाही',
+      tTowed: 'वाहन आमच्या यार्डमध्ये आहे. शुल्क दररोज वाढते. खालील कागदपत्रे घेऊन यार्डला या.', tHold: 'वाहन यार्डमध्ये होल्डवर आहे. येण्यापूर्वी वॉर्ड कार्यालय / पोलीस ठाण्याशी संपर्क करा.',
+      tProc: 'वाहन भंगार यादीत आहे. वाहन घेण्यासाठी लगेच वॉर्ड कार्यालयाशी संपर्क करा.', tNotice: 'टोइंग आणि शुल्क टाळण्यासाठी खालील तारखेपूर्वी वाहन रस्त्यावरून हलवा.',
+      tRel: 'हे वाहन मालकाला आधीच दिले आहे.', tScr: 'या वाहनावर दावा झाला नाही आणि नियमानुसार निकाली काढले.', tRem: 'वाहन जागेवर सापडले नाही. कोणतीही कारवाई बाकी नाही.',
+      track: 'ट्रॅकिंग क्रमांक', towedOn: 'उचलल्याची तारीख', yard: 'यार्ड', map: 'गूगल मॅपमध्ये उघडा', dues: 'आज भरायची रक्कम', breakup: 'दंड ₹{p} + टोइंग ₹{t} + साठवण ₹{s} ({d} दिवस × ₹{r})',
+      docs: 'ही कागदपत्रे आणा', noticeOn: 'नोटीस लावल्याची तारीख', towAfter: 'यापूर्वी हलवा', office: 'वॉर्ड कार्यालय', contact: 'हेल्पलाईन', relOn: 'सोडल्याची तारीख',
+      d1: 'वाहनाचे नोंदणी प्रमाणपत्र (RC)', d2: 'मालकाचे फोटो ओळखपत्र (आधार / पॅन / वाहन परवाना)', d3: 'वाहन विमा', d4: 'मालकाऐवजी दुसरे कोणी आल्यास अधिकारपत्र + ओळखपत्र',
+      bad: 'वाहन क्रमांक असा लिहा: MH03AB1234', robot: 'कृपया "मी रोबोट नाही" वर टिक करा.', err: 'आत्ता तपासता आले नाही — कृपया पुन्हा प्रयत्न करा.' }
+  };
+  var L = 'en'; try { L = localStorage.getItem('east:lang') || (navigator.language || '').slice(0, 2); } catch (e) {}
+  if (!T[L]) L = 'en';
+  function t(k) { return (T[L] && T[L][k]) || T.en[k] || k; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function paint() {
+    document.documentElement.lang = L;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function (el) { el.textContent = t(el.getAttribute('data-t')); });
+    Array.prototype.forEach.call(document.querySelectorAll('#lang button'), function (b) { b.classList.toggle('on', b.getAttribute('data-l') === L); });
+    if (last) show(last);
+  }
+  document.getElementById('lang').onclick = function (e) { var l = e.target.getAttribute('data-l'); if (!l) return; L = l; try { localStorage.setItem('east:lang', l); } catch (x) {} paint(); };
+
+  // ---- SHA-256 (compact, synchronous: fast enough to solve the check in well under a second) ----
+  var K = [], H0 = [];
+  (function () { function frac(x) { return ((x - Math.floor(x)) * 4294967296) | 0; } var n = 2, c = 0; while (c < 64) { var p = true; for (var i = 2; i * i <= n; i++) if (n % i === 0) { p = false; break; } if (p) { if (c < 8) H0[c] = frac(Math.pow(n, 1 / 2)); K[c] = frac(Math.pow(n, 1 / 3)); c++; } n++; } })();
+  function sha256(str) {
+    var b = unescape(encodeURIComponent(str)), l = b.length, w = [], i;
+    for (i = 0; i < l; i++) w[i >> 2] |= b.charCodeAt(i) << (24 - (i % 4) * 8);
+    w[l >> 2] |= 0x80 << (24 - (l % 4) * 8); w[((l + 8 >> 6) << 4) + 15] = l * 8;
+    var h = H0.slice(), W = new Array(64);
+    for (i = 0; i < w.length; i += 16) {
+      var a = h[0], bb = h[1], c = h[2], d = h[3], e = h[4], f = h[5], g = h[6], hh = h[7];
+      for (var j = 0; j < 64; j++) {
+        if (j < 16) W[j] = w[i + j] | 0;
+        else { var x = W[j - 15], y = W[j - 2]; W[j] = (((x >>> 7 | x << 25) ^ (x >>> 18 | x << 14) ^ (x >>> 3)) + W[j - 7] + ((y >>> 17 | y << 15) ^ (y >>> 19 | y << 13) ^ (y >>> 10)) + W[j - 16]) | 0; }
+        var t1 = (hh + ((e >>> 6 | e << 26) ^ (e >>> 11 | e << 21) ^ (e >>> 25 | e << 7)) + ((e & f) ^ (~e & g)) + K[j] + W[j]) | 0;
+        var t2 = (((a >>> 2 | a << 30) ^ (a >>> 13 | a << 19) ^ (a >>> 22 | a << 10)) + ((a & bb) ^ (a & c) ^ (bb & c))) | 0;
+        hh = g; g = f; f = e; e = (d + t1) | 0; d = c; c = bb; bb = a; a = (t1 + t2) | 0;
+      }
+      h[0] = (h[0] + a) | 0; h[1] = (h[1] + bb) | 0; h[2] = (h[2] + c) | 0; h[3] = (h[3] + d) | 0; h[4] = (h[4] + e) | 0; h[5] = (h[5] + f) | 0; h[6] = (h[6] + g) | 0; h[7] = (h[7] + hh) | 0;
+    }
+    return h;
+  }
+  function zeros(h) { var z = 0; for (var i = 0; i < 8; i++) { if (h[i] === 0) { z += 32; continue; } return z + Math.clz32(h[i]); } return z; }
+  function solve(ch) { for (var n = 0; n < 5e7; n++) if (zeros(sha256(ch.c + ':' + n)) >= ch.bits) return n; return -1; }
+
+  function call(fn, args) {
+    return fetch(EXEC, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ fn: fn, args: args }) })
+      .then(function (r) { return r.json(); }).then(function (x) { if (!x.ok) throw new Error(x.e); return x.r; });
+  }
+  var bid = ''; try { bid = localStorage.getItem('east:bid') || ''; if (!bid) { bid = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('east:bid', bid); } } catch (e) { bid = 'nostore'; }
+  var siteKey = '', widget = null, last = null, busy = false;
+  function captchaToken() { return widget != null && window.grecaptcha ? grecaptcha.getResponse(widget) : ''; }
+  function loadCaptcha(site) {
+    if (!site || siteKey) return; siteKey = site;
+    window.onRecaptcha = function () { widget = grecaptcha.render('cap', { sitekey: site }); };
+    var s = document.createElement('script'); s.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptcha&render=explicit&hl=' + L; document.head.appendChild(s);
+  }
+  call('publicChallenge', []).then(function (ch) { loadCaptcha(ch.site); }).catch(function () {});
+
+  var go = document.getElementById('go'), msg = document.getElementById('msg'), inp = document.getElementById('vrn');
+  inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go.click(); });
+  go.onclick = function () {
+    var v = inp.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!/^[A-Z]{2}\d{1,2}[A-Z]{0,3}\d{1,4}$/.test(v)) { msg.textContent = t('bad'); return; }
+    if (siteKey && !captchaToken()) { msg.textContent = t('robot'); return; }
+    if (busy) return; busy = true; go.disabled = true; go.textContent = t('checking'); msg.textContent = '';
+    call('publicChallenge', []).then(function (ch) {
+      loadCaptcha(ch.site);
+      return call('publicLookup', [v, ch.c, ch.sig, String(solve(ch)), captchaToken(), bid]);
+    }).then(function (r) { last = r; show(r); })
+      .catch(function (e) { msg.textContent = (e && e.message) || t('err'); })
+      .then(function () { busy = false; go.disabled = false; go.textContent = t('check'); if (widget != null && window.grecaptcha) grecaptcha.reset(widget); });
+  };
+  function money(n) { return Number(n || 0).toLocaleString('en-IN'); }
+  function show(r) {
+    var st = r.found ? r.status : 'none', head = { none: 'none', towed: 'towed', hold: 'hold', processing: 'processing', noticed: 'noticed', released: 'released', scrapped: 'scrapped', removed: 'removed' }[st] || 'towed';
+    var text = { towed: 'tTowed', hold: 'tHold', processing: 'tProc', noticed: 'tNotice', released: 'tRel', scrapped: 'tScr', removed: 'tRem', none: 'noneS' }[st];
+    var kv = [];
+    if (r.tracking) kv.push([t('track'), esc(r.tracking)]);
+    if (r.noticeDate) kv.push([t('noticeOn'), esc(r.noticeDate)]);
+    if (r.towAfter) kv.push([t('towAfter'), '<b style="color:var(--err)">' + esc(r.towAfter) + '</b>']);
+    if (r.towedOn) kv.push([t('towedOn'), esc(r.towedOn)]);
+    if (r.releasedOn) kv.push([t('relOn'), esc(r.releasedOn)]);
+    if (r.yard) kv.push([t('yard'), '<b>' + esc(r.yard) + '</b>' + (r.yardAddress ? '<br>' + esc(r.yardAddress) + '<br><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.yardAddress) + '">' + t('map') + '</a>' : '')]);
+    if (r.office) kv.push([t('office') + (r.ward ? ' (' + esc(r.ward) + ')' : ''), esc(r.office) + (r.officeEmail ? '<br>' + esc(r.officeEmail) : '')]);
+    if (r.contact) kv.push([t('contact'), esc(r.contact)]);
+    var d = r.dues;
+    document.getElementById('out').innerHTML = '<div class="card res ' + head + '"><h2>' + esc(r.found ? r.vrn + ' — ' : '') + t(head) + '</h2><div>' + t(text) + '</div>'
+      + (d ? '<div style="margin-top:12px"><div class="muted">' + t('dues') + '</div><div class="dues">₹' + money(d.total) + '</div><div class="muted">' + t('breakup').replace('{p}', money(d.penalty)).replace('{t}', money(d.towing)).replace('{s}', money(d.storage)).replace('{d}', d.days).replace('{r}', money(d.perDay)) + '</div></div>' : '')
+      + (kv.length ? '<div class="kv">' + kv.map(function (x) { return '<b>' + x[0] + '</b><span>' + x[1] + '</span>'; }).join('') + '</div>' : '')
+      + (r.docs ? '<b>' + t('docs') + '</b><ul>' + ['d1', 'd2', 'd3', 'd4'].map(function (k) { return '<li>' + t(k) + '</li>'; }).join('') + '</ul>' : '') + '</div>';
+    document.getElementById('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  paint();
+})();
 </script>
 </body>
 </html>
