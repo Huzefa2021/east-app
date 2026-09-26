@@ -1,11 +1,17 @@
 {
-  "name": "MCGM — Abandoned Vehicles (East Zone)",
+  "name": "MCGM East Zone Abandoned Vehicle Project",
   "short_name": "MCGM East",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#08263d",
   "theme_color": "#0b3f64",
   "icons": [
-    { "src": "logo.png", "sizes": "1266x1266", "type": "image/png", "purpose": "any" }
-  ]
+    {
+      "src": "logo.png",
+      "sizes": "1266x1266",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "description": "Crescendo Innovative Solutions LLP · MCGM East Zone Abandoned Vehicle Project"
 }
