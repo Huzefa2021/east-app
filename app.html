@@ -46,6 +46,12 @@
   var b = document.getElementById('boot');
   // the system shows its own identical splash while it starts, so this one simply fades into it
   document.getElementById('app').addEventListener('load', function () { b.classList.add('out'); setTimeout(function () { b.remove(); }, 400); });
+  // the app asks for a reload after an update (it cannot reload itself from inside the Google frame)
+  window.addEventListener('message', function (e) {
+    var h = ''; try { h = new URL(e.origin).hostname; } catch (x) {}
+    if (!/(^|\.)googleusercontent\.com$|^script\.google\.com$/.test(h) || !e.data || e.data.east !== 'reload') return;
+    var f = document.getElementById('app'); f.src = f.src.split('?')[0] + '?v=' + Date.now();
+  });
   setTimeout(function () { if (document.body.contains(b)) b.querySelector('span').innerHTML = 'Still loading… <a href="https://script.google.com/macros/s/AKfycbwiA58-V13C2upSaltf3ODK-AcNaR-R86JhZILpNDiKMdT7rVaXmjJFYxWs6dSHMGLJ/exec">open directly</a>'; }, 25000);
 </script>
 </body>
