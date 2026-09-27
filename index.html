@@ -4,18 +4,45 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.mcgm.gov.in https://www.gstatic.com; connect-src https://script.google.com https://*.googleusercontent.com; frame-src https://www.google.com https://recaptcha.google.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>MCGM — Abandoned Vehicles (East Zone)</title>
+<title>Was my vehicle towed? — Abandoned Vehicles, Eastern Suburbs, Mumbai (BMC / MCGM)</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="MCGM East Zone Abandoned Vehicle Project — check if your vehicle was towed. Crescendo Innovative Solutions LLP">
-<meta property="og:title" content="MCGM East Zone — Was my vehicle towed?">
+<meta name="description" content="Check if your abandoned vehicle was noticed or towed in Mumbai’s Eastern Suburbs (BMC / MCGM): yard location, charges payable today and documents to bring. Free, in English, Hindi and Marathi.">
+<meta name="keywords" content="abandoned vehicle Mumbai, towed vehicle BMC, MCGM towing yard, vehicle towed Kurla, Ghatkopar, Chembur, Mulund, Bhandup, Govandi, vehicle release BMC, Eastern Suburbs">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Crescendo Innovative Solutions LLP">
+<link rel="canonical" href="https://east.crescendoits.com/">
+<link rel="alternate" hreflang="en-IN" href="https://east.crescendoits.com/">
+<link rel="alternate" hreflang="hi-IN" href="https://east.crescendoits.com/?lang=hi">
+<link rel="alternate" hreflang="mr-IN" href="https://east.crescendoits.com/?lang=mr">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MCGM East Zone — Abandoned Vehicles">
+<meta property="og:title" content="Was my vehicle towed? — Eastern Suburbs, Mumbai">
+<meta property="og:description" content="Find your towed vehicle, the yard and the charges payable today.">
 <meta property="og:url" content="https://east.crescendoits.com/">
 <meta property="og:image" content="https://east.crescendoits.com/logo.png">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Was my vehicle towed? — Eastern Suburbs, Mumbai">
+<meta name="twitter:description" content="Find your towed vehicle, the yard and the charges payable today.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"GovernmentService","name":"Abandoned vehicle lookup — Eastern Suburbs, Mumbai","serviceType":"Towed / abandoned vehicle information",
+  "areaServed":{"@type":"AdministrativeArea","name":"Eastern Suburbs, Mumbai"},"provider":{"@type":"GovernmentOrganization","name":"Brihanmumbai Municipal Corporation (MCGM)","url":"https://portal.mcgm.gov.in/"},
+  "availableChannel":{"@type":"ServiceChannel","serviceUrl":"https://east.crescendoits.com/","availableLanguage":["en","hi","mr"]},"url":"https://east.crescendoits.com/"},
+ {"@type":"Organization","name":"Crescendo Innovative Solutions LLP","url":"https://east.crescendoits.com/","logo":"https://east.crescendoits.com/logo.png"},
+ {"@type":"WebSite","name":"MCGM East Zone — Abandoned Vehicles","url":"https://east.crescendoits.com/","inLanguage":["en-IN","hi-IN","mr-IN"]}]}
+</script>
 <meta name="theme-color" content="#0b3f64">
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+  .strip { height: 4px; background: linear-gradient(90deg, #ff9933 0 33.3%, #fff 33.3% 66.6%, #138808 66.6%) }
+  .logos { display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 6px 0 }
+  .logos img { height: 44px; width: auto; object-fit: contain } .logos img.round { border-radius: 50% }
+  .agree { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-size: .92rem } .agree input { width: auto; margin-top: 3px }
+  footer a { color: var(--blue2) }
   :root { --blue: #0b3f64; --blue2: #1a4f8f; --gold: #d4a017; --ink: #101828; --muted: #667085; --line: #e4e7ec; --ok: #067647; --warn: #b54708; --err: #b42318 }
   * { box-sizing: border-box }
   body { margin: 0; font-family: Inter, "Noto Sans Devanagari", Arial, sans-serif; color: var(--ink); background: #f4f6fa }
@@ -53,11 +80,13 @@
   <div class="lang" id="lang"><button data-l="en">EN</button><button data-l="hi">हिं</button><button data-l="mr">मरा</button></div>
   <a class="team" href="app.html" data-t="team">🔐 Team login</a>
 </header>
+<div class="strip" aria-hidden="true"></div>
 <main>
   <div class="hero"><h1 data-t="h1">Was my vehicle towed?</h1><p data-t="h1s">Enter your vehicle number to see where it is and what to pay.</p></div>
   <div class="card">
     <label for="vrn" data-t="vrn">Vehicle number</label>
     <input id="vrn" maxlength="13" autocomplete="off" placeholder="MH03AB1234" inputmode="text">
+    <label class="agree"><input type="checkbox" id="agree"> <span data-t="agree">I agree to the Terms of Use and Privacy Policy. I am the owner or acting for the owner.</span></label>
     <div id="cap" style="margin-top:12px"></div>
     <button class="go" id="go" data-t="check">Check</button>
     <div class="msg" id="msg"></div>
@@ -66,7 +95,12 @@
   <div class="card app"><div style="flex:1"><b data-t="appT">GPS camera app for our team</b><div class="muted" data-t="appS">Field staff: install this camera app so every photo carries the date, time and GPS location.</div></div>
     <a href="https://gpsmapcamera.com/" target="_blank" rel="noopener" data-t="appB">⬇ Download</a></div>
 </main>
-<footer>© Municipal Corporation of Greater Mumbai · Crescendo Innovative Solutions LLP</footer>
+<div class="card"><div class="logos">
+  <img class="round" src="https://www.mcgm.gov.in/com.mcgm.newframework/images/logo_V1.png" alt="MCGM — Brihanmumbai Municipal Corporation">
+  <img src="startupindia.png" alt="Startup India — DPIIT recognised (DIPP284342)">
+  <img src="msme.png" alt="MSME — Udyam registered (UDYAM-MH-18-0352194)" style="border-radius:6px">
+</div><div class="muted" style="text-align:center" data-t="who">Portal for abandoned vehicles in Mumbai’s Eastern Suburbs, run for MCGM by the contractor M/s. Raza Steel with Crescendo Innovative Solutions LLP (DPIIT-recognised start-up). This is not MCGM’s main website.</div></div>
+<footer>© Municipal Corporation of Greater Mumbai · <a href="privacy.html" data-t="privacy">Privacy Policy</a> · <a href="terms.html" data-t="terms">Terms of Use</a> · Crescendo Innovative Solutions LLP</footer>
 <script>
 (function () {
   var EXEC = 'https://script.google.com/macros/s/AKfycbwiA58-V13C2upSaltf3ODK-AcNaR-R86JhZILpNDiKMdT7rVaXmjJFYxWs6dSHMGLJ/exec';
@@ -81,7 +115,9 @@
       track: 'Tracking no.', towedOn: 'Towed on', yard: 'Yard', map: 'Open in Google Maps', dues: 'Amount payable today', breakup: 'Penalty ₹{p} + towing ₹{t} + storage ₹{s} ({d} days × ₹{r})',
       docs: 'Bring these documents', noticeOn: 'Notice pasted on', towAfter: 'Remove before', office: 'Ward office', contact: 'Helpline', relOn: 'Released on',
       d1: 'Registration Certificate (RC) of the vehicle', d2: 'Photo ID of the owner (Aadhaar / PAN / driving licence)', d3: 'Vehicle insurance', d4: 'Authority letter + ID if someone else comes for the owner',
-      bad: 'Enter the vehicle number like MH03AB1234.', robot: 'Please tick "I am not a robot".', err: 'Could not check now — please try again.' },
+      bad: 'Enter the vehicle number like MH03AB1234.', robot: 'Please tick "I am not a robot".', err: 'Could not check now — please try again.',
+      agree: 'I agree to the Terms of Use and Privacy Policy. I am the owner or acting for the owner.', needAgree: 'Please tick that you agree to the Terms of Use and Privacy Policy.',
+      privacy: 'Privacy Policy', terms: 'Terms of Use', who: 'Portal for abandoned vehicles in Mumbai’s Eastern Suburbs, run for MCGM by the contractor M/s. Raza Steel with Crescendo Innovative Solutions LLP (DPIIT-recognised start-up). This is not MCGM’s main website.' },
     hi: { org: 'बीएमसी पूर्व क्षेत्र', proj: 'लावारिस वाहन', team: '🔐 टीम लॉगिन', h1: 'क्या मेरा वाहन उठाया गया?', h1s: 'अपना वाहन नंबर डालें — वाहन कहाँ है और कितना भरना है, देखें।',
       vrn: 'वाहन नंबर', check: 'देखें', checking: 'जाँच हो रही है…', appT: 'हमारी टीम के लिए GPS कैमरा ऐप', appS: 'फ़ील्ड स्टाफ: यह कैमरा ऐप लगाएँ ताकि हर फ़ोटो में तारीख, समय और GPS लोकेशन रहे।', appB: '⬇ डाउनलोड',
       none: 'इस वाहन का कोई रिकॉर्ड नहीं', noneS: 'इस नंबर का कोई लावारिस-वाहन रिकॉर्ड नहीं है।', towed: 'आपका वाहन उठाया गया है', hold: 'आपका वाहन होल्ड पर है', processing: 'स्क्रैप की सूची में — तुरंत संपर्क करें',
@@ -92,7 +128,9 @@
       track: 'ट्रैकिंग नंबर', towedOn: 'उठाने की तारीख', yard: 'यार्ड', map: 'गूगल मैप में खोलें', dues: 'आज देय राशि', breakup: 'जुर्माना ₹{p} + टोइंग ₹{t} + भंडारण ₹{s} ({d} दिन × ₹{r})',
       docs: 'ये दस्तावेज़ साथ लाएँ', noticeOn: 'नोटिस लगाने की तारीख', towAfter: 'इससे पहले हटाएँ', office: 'वार्ड कार्यालय', contact: 'हेल्पलाइन', relOn: 'छोड़ने की तारीख',
       d1: 'वाहन का रजिस्ट्रेशन सर्टिफिकेट (RC)', d2: 'मालिक का फ़ोटो पहचान पत्र (आधार / पैन / ड्राइविंग लाइसेंस)', d3: 'वाहन बीमा', d4: 'मालिक के स्थान पर कोई और आए तो अधिकार पत्र + पहचान पत्र',
-      bad: 'वाहन नंबर ऐसे लिखें: MH03AB1234', robot: 'कृपया "मैं रोबोट नहीं हूँ" पर टिक करें।', err: 'अभी जाँच नहीं हो सकी — कृपया फिर कोशिश करें।' },
+      bad: 'वाहन नंबर ऐसे लिखें: MH03AB1234', robot: 'कृपया "मैं रोबोट नहीं हूँ" पर टिक करें।', err: 'अभी जाँच नहीं हो सकी — कृपया फिर कोशिश करें।',
+      agree: 'मैं उपयोग की शर्तों और गोपनीयता नीति से सहमत हूँ। मैं वाहन मालिक हूँ या मालिक की ओर से हूँ।', needAgree: 'कृपया शर्तों और गोपनीयता नीति से सहमति पर टिक करें।',
+      privacy: 'गोपनीयता नीति', terms: 'उपयोग की शर्तें', who: 'मुंबई पूर्वी उपनगर के लावारिस वाहनों का पोर्टल — MCGM के लिए ठेकेदार मे. रज़ा स्टील और क्रेसेंडो इनोवेटिव सॉल्यूशंस LLP (DPIIT मान्यता प्राप्त स्टार्ट-अप) द्वारा चलाया जाता है। यह MCGM की मुख्य वेबसाइट नहीं है।' },
     mr: { org: 'बृहन्मुंबई महानगरपालिका पूर्व विभाग', proj: 'बेवारस वाहने', team: '🔐 टीम लॉगिन', h1: 'माझे वाहन उचलले गेले का?', h1s: 'तुमचा वाहन क्रमांक टाका — वाहन कुठे आहे आणि किती भरायचे ते पहा.',
       vrn: 'वाहन क्रमांक', check: 'तपासा', checking: 'तपासत आहे…', appT: 'आमच्या टीमसाठी GPS कॅमेरा ॲप', appS: 'फील्ड कर्मचारी: हा कॅमेरा ॲप लावा, म्हणजे प्रत्येक फोटोवर तारीख, वेळ आणि GPS स्थान येईल.', appB: '⬇ डाउनलोड',
       none: 'या वाहनाची नोंद नाही', noneS: 'या क्रमांकाची बेवारस-वाहन नोंद नाही.', towed: 'तुमचे वाहन उचलले गेले आहे', hold: 'तुमचे वाहन होल्डवर आहे', processing: 'भंगार यादीत — लगेच संपर्क करा',
@@ -103,9 +141,11 @@
       track: 'ट्रॅकिंग क्रमांक', towedOn: 'उचलल्याची तारीख', yard: 'यार्ड', map: 'गूगल मॅपमध्ये उघडा', dues: 'आज भरायची रक्कम', breakup: 'दंड ₹{p} + टोइंग ₹{t} + साठवण ₹{s} ({d} दिवस × ₹{r})',
       docs: 'ही कागदपत्रे आणा', noticeOn: 'नोटीस लावल्याची तारीख', towAfter: 'यापूर्वी हलवा', office: 'वॉर्ड कार्यालय', contact: 'हेल्पलाईन', relOn: 'सोडल्याची तारीख',
       d1: 'वाहनाचे नोंदणी प्रमाणपत्र (RC)', d2: 'मालकाचे फोटो ओळखपत्र (आधार / पॅन / वाहन परवाना)', d3: 'वाहन विमा', d4: 'मालकाऐवजी दुसरे कोणी आल्यास अधिकारपत्र + ओळखपत्र',
-      bad: 'वाहन क्रमांक असा लिहा: MH03AB1234', robot: 'कृपया "मी रोबोट नाही" वर टिक करा.', err: 'आत्ता तपासता आले नाही — कृपया पुन्हा प्रयत्न करा.' }
+      bad: 'वाहन क्रमांक असा लिहा: MH03AB1234', robot: 'कृपया "मी रोबोट नाही" वर टिक करा.', err: 'आत्ता तपासता आले नाही — कृपया पुन्हा प्रयत्न करा.',
+      agree: 'मला वापराच्या अटी आणि गोपनीयता धोरण मान्य आहे. मी वाहन मालक आहे किंवा मालकाच्या वतीने आहे.', needAgree: 'कृपया अटी आणि गोपनीयता धोरण मान्य असल्याची टिक करा.',
+      privacy: 'गोपनीयता धोरण', terms: 'वापराच्या अटी', who: 'मुंबई पूर्व उपनगरातील बेवारस वाहनांचे पोर्टल — MCGM साठी ठेकेदार मे. रझा स्टील आणि क्रेसेंडो इनोव्हेटिव्ह सोल्युशन्स LLP (DPIIT मान्यताप्राप्त स्टार्ट-अप) चालवतात. ही MCGM ची मुख्य वेबसाइट नाही.' }
   };
-  var L = 'en'; try { L = localStorage.getItem('east:lang') || (navigator.language || '').slice(0, 2); } catch (e) {}
+  var L = 'en', qp = (location.search.match(/[?&]lang=(en|hi|mr)/) || [])[1]; try { L = qp || localStorage.getItem('east:lang') || (navigator.language || '').slice(0, 2); } catch (e) {}
   if (!T[L]) L = 'en';
   function t(k) { return (T[L] && T[L][k]) || T.en[k] || k; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -160,6 +200,7 @@
   go.onclick = function () {
     var v = inp.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
     if (!/^[A-Z]{2}\d{1,2}[A-Z]{0,3}\d{1,4}$/.test(v)) { msg.textContent = t('bad'); return; }
+    if (!document.getElementById('agree').checked) { msg.textContent = t('needAgree'); return; }
     if (siteKey && !captchaToken()) { msg.textContent = t('robot'); return; }
     if (busy) return; busy = true; go.disabled = true; go.textContent = t('checking'); msg.textContent = '';
     call('publicChallenge', []).then(function (ch) {
